@@ -7,33 +7,25 @@ using System.Threading.Tasks;
 
 namespace UWPSoundBoard.Model
 {
-    public class SoundManager
+    public static class SoundManager
     {
-        public void GetAllSounds(ObservableCollection<Sound> sounds)
+        public static void GetAllSounds(ObservableCollection<Sound> sounds)
         {
             var allSounds = getSounds();
             sounds.Clear();
             allSounds.ForEach(sound => sounds.Add(sound));
         }
 
-        public void GetSoundsByCategory(ObservableCollection<Sound> sounds, 
+        public static void GetSoundsByCategory(ObservableCollection<Sound> sounds, 
             SoundCategory category)
         {
             var allSounds = getSounds();
-            //var filteredSounds = new List<Sound>();
-            //foreach (var sound in allSounds)
-            //{
-            //    if (sound.Category == category)
-            //    {
-            //        filteredSounds.Add(sound);
-            //    }
-            //}
-
             var filteredSounds = allSounds.Where(sound => sound.Category == category).ToList();
             sounds.Clear();
             filteredSounds.ForEach(sound => sounds.Add(sound));
         }
-        private List<Sound> getSounds()
+
+        private static List<Sound> getSounds()
         {
             var sounds = new List<Sound>();
             sounds.Add(new Sound("Cat", SoundCategory.Animals));
